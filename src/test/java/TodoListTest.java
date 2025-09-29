@@ -1,6 +1,8 @@
 import org.example.TodoList;
 import org.junit.jupiter.api.Test;
 
+import java.util.Set;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -29,5 +31,35 @@ public class TodoListTest {
         TodoList t = new TodoList();
         t.add(" ");
         assertEquals(0, t.size());
+    }
+
+    @Test
+    void shouldBeTrueWhenClear() {
+        TodoList t = new TodoList();
+        t.add("korowa");
+
+        assertTrue(t.clear());
+    }
+
+    @Test
+    void shouldEndToSpecificStringWhenDone() {
+        TodoList t = new TodoList();
+
+        String task = "korowa";
+        t.add(task);
+
+        assertEquals(task + " -- completed", t.done(0));
+    }
+
+    @Test
+    void shouldReturnAllTasksWithSubstringWhenSearch() {
+        TodoList t = new TodoList();
+        t.add("korowa");
+        t.add("sobaka");
+        t.add("polska korowa");
+
+        Set<String> tasks = t.search("korowa");
+
+        assertEquals(2, tasks.size());
     }
 }
